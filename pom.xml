@@ -15,10 +15,13 @@
     <artifactId>camel-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>camel-app</name>
+    <packaging>bundle</packaging>
+
+
     <description>Camel DEMO</description>
     <properties>
         <java.version>1.8</java.version>
-        <camel.version>2.23.2</camel.version>
+        <camel.version>2.21.0</camel.version>
     </properties>
     <dependencies>
         <dependency>
@@ -29,7 +32,7 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jms</artifactId>
-            <version>2.23.2</version>
+            <version>${camel.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
@@ -52,6 +55,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <version>2.3.7</version>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Import-Package>!org.springframework.boot,!org.springframework.boot.autoconfigure,!org.springframework.context,!org.springframework.stereotype,*</Import-Package>
+                        <Embed-Dependency>org.springframework.boot</Embed-Dependency>
+                    </instructions>
+                </configuration>
             </plugin>
         </plugins>
     </build>
